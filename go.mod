@@ -165,6 +165,7 @@ require (
 	golang.org/x/sync v0.19.0
 	golang.org/x/tools/godoc v0.1.0-deprecated
 	google.golang.org/grpc/security/advancedtls v1.0.0
+	go4.org/netipx v0.0.0-20231129151722-fdeea329fbba
 )
 
 require github.com/k0kubun/colorstring v0.0.0-20150214042306-9440f1994b88 // indirect
