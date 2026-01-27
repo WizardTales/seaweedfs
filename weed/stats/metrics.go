@@ -362,6 +362,30 @@ var (
 			Help:      "Counter of s3 server handlers.",
 		}, []string{"type"})
 
+	S3ReadCounter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Namespace: Namespace,
+			Subsystem: "s3",
+			Name:      "read_total",
+			Help:      "Counter of s3 server handlers.",
+		}, []string{"bucket"})
+
+	S3WriteCounter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Namespace: Namespace,
+			Subsystem: "s3",
+			Name:      "write_total",
+			Help:      "Counter of s3 server handlers.",
+		}, []string{"bucket"})
+
+	S3OtherCounter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Namespace: Namespace,
+			Subsystem: "s3",
+			Name:      "other_total",
+			Help:      "Counter of s3 server handlers.",
+		}, []string{"bucket"})
+
 	S3RequestHistogram = prometheus.NewHistogramVec(
 		prometheus.HistogramOpts{
 			Namespace: Namespace,
@@ -416,6 +440,14 @@ var (
 			Namespace: Namespace,
 			Subsystem: "s3",
 			Name:      "bucket_traffic_sent_bytes_total",
+			Help:      "Total number of bytes sent from an S3 bucket to clients.",
+		}, []string{"bucket"})
+
+	S3BucketExternalSentBytesCounter = prometheus.NewCounterVec(
+		prometheus.CounterOpts{
+			Namespace: Namespace,
+			Subsystem: "s3",
+			Name:      "bucket_traffic_sent_bytes_external_total",
 			Help:      "Total number of bytes sent from an S3 bucket to clients.",
 		}, []string{"bucket"})
 
@@ -505,6 +537,9 @@ func init() {
 	Gather.MustRegister(VolumeServerInFlightUploadSize)
 
 	Gather.MustRegister(S3RequestCounter)
+	Gather.MustRegister(S3ReadCounter)
+	Gather.MustRegister(S3OtherCounter)
+	Gather.MustRegister(S3WriteCounter)
 	Gather.MustRegister(S3HandlerCounter)
 	Gather.MustRegister(S3RequestHistogram)
 	Gather.MustRegister(S3InFlightRequestsGauge)
@@ -513,6 +548,7 @@ func init() {
 	Gather.MustRegister(S3TimeToFirstByteHistogram)
 	Gather.MustRegister(S3BucketTrafficReceivedBytesCounter)
 	Gather.MustRegister(S3BucketTrafficSentBytesCounter)
+	Gather.MustRegister(S3BucketExternalSentBytesCounter)
 	Gather.MustRegister(S3DeletedObjectsCounter)
 	Gather.MustRegister(S3UploadedObjectsCounter)
 	Gather.MustRegister(S3BucketSizeBytesGauge)
