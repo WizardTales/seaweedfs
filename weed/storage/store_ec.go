@@ -413,7 +413,7 @@ func (s *Store) recoverOneRemoteEcShardInterval(needleId types.NeedleId, ecVolum
 			erasure_coding.DataShardsCount, missingShards)
 	}
 
-	if err = enc.ReconstructData(bufs[:erasure_coding.TotalShardsCount]); err != nil {
+	if err = enc.Reconstruct(bufs[:erasure_coding.TotalShardsCount]); err != nil {
 		return 0, false, fmt.Errorf("failed to reconstruct data for shard %d.%d with %d available shards %v: %w",
 			ecVolume.VolumeId, shardIdToRecover, len(availableShards), availableShards, err)
 	}
